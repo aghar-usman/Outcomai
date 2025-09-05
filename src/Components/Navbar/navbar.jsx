@@ -1,140 +1,117 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 import './navbar.css';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
-
-  const handleWaitlistClick = () => {
-    // Scroll to the waitlist form in the hero section
-    const waitlistForm = document.getElementById('waitlist-form');
-    if (waitlistForm) {
-      waitlistForm.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+    setIsMobileMenuOpen(false);
+  };
+
+  const navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'features', label: 'Features' },
+    { id: 'pricing', label: 'Pricing' },
+    { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact' }
+  ];
 
   return (
     <>
       <nav className={`navbar-container ${isScrolled ? 'scrolled' : ''}`}>
-        {/* Left Bubble - Logo */}
         <div className="nav-bubble logo-bubble">
-          <NavLink to="/" className="logo-link">
-            <h1 className='logo-text'>Outcom.ai</h1>
-          </NavLink>
+          <a href="/" className="logo-link">
+            <svg className="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="url(#gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="url(#gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--accent-primary)" />
+                  <stop offset="100%" stopColor="var(--accent-secondary)" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span className="logo-text">Nexus</span>
+          </a>
         </div>
 
-        {/* Middle Bubble - Navigation (Desktop) */}
         <div className="nav-bubble links-bubble">
           <ul className="nav-links">
-            <li>
-              <NavLink to="/" className="nav-link" end>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/blog" className="nav-link" end>
-                Blog
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/career" className="nav-link">
-                Careers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" className="nav-link" end>
-                About Us
-              </NavLink>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  className={`nav-link ${activeLink === link.id ? 'active' : ''}`}
+                  onClick={() => handleLinkClick(link.id)}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Right Bubble - Actions (Desktop) */}
         <div className="nav-bubble actions-bubble">
-          <button className="waitlist-btn" onClick={handleWaitlistClick}>
+          <button className="waitlist-btn">
             <span className="notify-icon">🔔</span>
             Join Waitlist
           </button>
         </div>
 
-        {/* Hamburger Menu Button (Mobile) */}
         <div className="hamburger-container">
           <div className="nav-bubble hamburger-bubble">
-            <button className="hamburger" onClick={toggleMenu}>
-              {isMenuOpen ? '✕' : '☰'}
+            <button 
+              className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMenuOpen ? 'active' : ''}`}>
-        <button className="mobile-close-btn" onClick={toggleMenu}>
-          ✕
+      <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+        <button className="close-menu" onClick={toggleMobileMenu} aria-label="Close menu">
+          <span></span>
+          <span></span>
         </button>
+        
         <ul className="mobile-nav-links">
-          <li>
-            <NavLink 
-              to="/" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/blog" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Blog
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/career" 
-              className="nav-link" 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Careers
-            </NavLink>
-          </li>
-          <li>
-            <NavLink 
-              to="/about" 
-              className="nav-link" 
-              end 
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About Us
-            </NavLink>
-          </li>
+          {navLinks.map((link) => (
+            <li key={link.id}>
+              <a
+                href={`#${link.id}`}
+                className={`nav-link ${activeLink === link.id ? 'active' : ''}`}
+                onClick={() => handleLinkClick(link.id)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
+        
         <div className="mobile-actions">
-          <button className="waitlist-btn" onClick={handleWaitlistClick}>
+          <button className="waitlist-btn">
             <span className="notify-icon">🔔</span>
             Join Waitlist
           </button>
