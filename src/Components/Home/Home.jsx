@@ -14,7 +14,7 @@ export const Home = () => {
       <section id="solution"><Solution /></section>
       <section id="outcomes"><Outcomes /></section>
       <section id="proof"><Proof /></section>
-      <section id="cta"><Cta /></section>
+      <section id="cta"><CTA /></section>
     </div>
   );
 };
