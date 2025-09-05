@@ -205,7 +205,7 @@
     opacity: 0.6;
     transform: translate(-50%, -50%) scale(1);
   }
- 50% {
+  50% {
     opacity: 0.4;
     transform: translate(-50%, -50%) scale(1.1);
   }
@@ -292,5 +292,9 @@
   
   .cta-button.primary:hover {
     transform: none;
+  }
+  
+  .cta-glow {
+    animation: none !important;
   }
 }
