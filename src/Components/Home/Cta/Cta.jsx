@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cta.css';
 
-const CTA = () => {
+const Cta = () => {
   return (
     <section className="cta-section">
       <div className="cta-glow"></div>
