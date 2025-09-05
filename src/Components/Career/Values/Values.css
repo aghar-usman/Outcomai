@@ -1,0 +1,463 @@
+/* Values.css - Fixed visibility issues */
+
+.career-values-section {
+  position: relative;
+  padding: 8rem 2rem;
+  background-color: var(--primary-dark);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.career-values-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.career-values-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(55, 65, 81, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(55, 65, 81, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  opacity: 0.3;
+}
+
+.career-values-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  animation: careerHeroGlowPulse 10s ease-in-out infinite;
+}
+
+.career-values-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.career-values-particle {
+  position: absolute;
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 50%;
+  animation: careerParticleFloat 15s infinite linear;
+  z-index: 0;
+}
+
+@keyframes careerParticleFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.career-values-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.career-values-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.career-values-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  color: var(--accent-secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.02em;
+}
+
+.career-values-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-family: 'Tektur', sans-serif;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.career-values-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.career-values-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.career-value-card {
+  background: rgba(15, 17, 23, 0.7);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  isolation: isolate;
+  opacity: 1; /* Fixed: Changed from 0 to 1 */
+  transform: translateY(0); /* Fixed: Changed from 30px to 0 */
+}
+
+.career-values-visible .career-value-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.career-value-card:nth-child(1) { transition-delay: 0.1s; }
+.career-value-card:nth-child(2) { transition-delay: 0.2s; }
+.career-value-card:nth-child(3) { transition-delay: 0.3s; }
+.career-value-card:nth-child(4) { transition-delay: 0.4s; }
+.career-value-card:nth-child(5) { transition-delay: 0.5s; }
+.career-value-card:nth-child(6) { transition-delay: 0.6s; } /* Added for the new value */
+
+.career-value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.career-value-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--value-color);
+  border-color: rgba(99, 102, 241, 0.6);
+}
+
+.career-value-card:hover::before {
+  opacity: 1;
+}
+
+.career-value-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.career-value-icon-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.career-value-icon-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.1);
+  backdrop-filter: blur(4px);
+  animation: careerIconPulse 3s infinite;
+}
+
+@keyframes careerIconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+.career-value-icon {
+  font-size: 2.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.career-value-orbits {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.career-value-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+}
+
+.career-value-orbit-1 {
+  width: 110%;
+  height: 110%;
+  animation: careerOrbitRotate 15s linear infinite;
+}
+
+.career-value-orbit-2 {
+  width: 130%;
+  height: 130%;
+  animation: careerOrbitRotate 20s linear infinite reverse;
+}
+
+@keyframes careerOrbitRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.career-value-connection-line {
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, var(--value-color, #6366F1), transparent);
+  opacity: 0.7;
+}
+
+.career-value-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.career-value-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-family: 'Tektur', sans-serif;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.career-value-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.career-value-hover-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(99, 102, 241, 0.15) 0%, transparent 20%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.career-value-card:hover .career-value-hover-effect {
+  opacity: 1;
+}
+
+/* Interactive mouse effect */
+.career-value-card {
+  cursor: pointer;
+}
+
+.career-value-card:hover {
+  --x: 50%;
+  --y: 50%;
+}
+
+/* Enhanced animations for better UX */
+@keyframes careerFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* JavaScript-triggered animations */
+.career-values-visible .career-value-card {
+  animation: careerFadeInUp 0.8s ease-out forwards;
+}
+
+/* Convert color variables to RGB for opacity control */
+.career-value-card {
+  --value-color-rgb: 99, 102, 241; /* Default fallback */
+}
+
+.career-value-card:nth-child(1) { --value-color: #6366F1; --value-color-rgb: 99, 102, 241; } /* Integrity - indigo */
+.career-value-card:nth-child(2) { --value-color: #10B981; --value-color-rgb: 16, 185, 129; } /* First Principles - emerald */
+.career-value-card:nth-child(3) { --value-color: #8B5CF6; --value-color-rgb: 139, 92, 246; } /* Innovation - purple */
+.career-value-card:nth-child(4) { --value-color: #EF4444; --value-color-rgb: 239, 68, 68; } /* Customer Centric - red */
+.career-value-card:nth-child(5) { --value-color: #818CF8; --value-color-rgb: 129, 140, 248; } /* Compassion - light indigo */
+.career-value-card:nth-child(6) { --value-color: #F59E0B; --value-color-rgb: 245, 158, 11; } /* Collaboration - amber */
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .career-values-title {
+    font-size: 3rem;
+  }
+  
+  .career-values-grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .career-values-section {
+    padding: 6rem 1.5rem;
+  }
+  
+  .career-values-title {
+    font-size: 2.5rem;
+  }
+  
+  .career-values-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .career-values-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .career-value-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .career-value-icon-container {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .career-value-icon {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .career-values-grid-container {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .career-values-section {
+    padding: 5rem 1rem;
+  }
+  
+  .career-values-title {
+    font-size: 2rem;
+  }
+  
+  .career-values-subtitle {
+    font-size: 1rem;
+  }
+  
+  .career-value-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .career-value-title {
+    font-size: 1.5rem;
+  }
+  
+  .career-value-icon-container {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1rem;
+  }
+  
+  .career-value-icon {
+    font-size: 1.8rem;
+  }
+}
+
+/* Add missing animations from hero.css if needed */
+@keyframes careerHeroGlowPulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes careerPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
