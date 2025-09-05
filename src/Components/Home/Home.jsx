@@ -4,7 +4,7 @@ import Features from './Features/Features';
 import Solution from './Solutions/Solution';
 import Outcomes from './Outcomes/Outcomes';
 import Proof from './Proof/Proof';
-import Cta from './Cta/Cta';
+import Cta from './Cta/CTA';
 
 export const Home = () => {
   return (
